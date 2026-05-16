@@ -1,0 +1,1 @@
+setenv bootargs 'mem=41776K console=ttyAMA0,115200 console=tty0 root=/dev/mtdblock2 rootfstype=squashfs rw mtdparts=sfc:192K(uboot),64K(env),7360K(rootfs),512K(data),64K(devinfo) init=/bin/sh'

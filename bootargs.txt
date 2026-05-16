@@ -1,0 +1,1 @@
+setenv bootargs 'mem=41776K console=ttyAMA0,115200 clk_ignore_unused initcall_debug rw root=/dev/mtdblock2 rootfstype=squashfs clk_ignore_unused initcall_debug mtdparts=sfc:192K(uboot),64K(env),7360K(rootfs),512K(data),64K(devinfo) proc_show=1 anony=1 mmz_allocator=ot mmz_zones=anonymous,0,0x428CC000,23760K mem_process_isolation=0 logmpp_show=1'

@@ -1,0 +1,23 @@
+# Logs
+*.log
+kameralog.log
+
+# Terminal recordings / macros
+Terminal*_*/
+*.tmf
+*.zip
+
+# Binary dumps / backups
+*.bin
+backup_*
+*.bak
+
+# Local secrets
+*.token
+*token*
+secrets.*
+
+# OS junk
+Thumbs.db
+.DS_Store
+desktop.ini
