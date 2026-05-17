@@ -1,0 +1,53 @@
+{
+    "loginList": [
+      {
+        "sysLangue": "zh",
+        "showLangue": "简体中文"
+      },
+      {
+        "sysLangue": "tw",
+        "showLangue": "繁體中文"
+      },
+      {
+        "sysLangue": "en",
+        "showLangue": "English"
+      },
+
+      {
+        "sysLangue": "ko",
+        "showLangue": "한국어"
+      },
+      {
+        "sysLangue": "uz",
+        "showLangue": "O'zbekcha"
+      },
+      {
+        "sysLangue": "it",
+        "showLangue": "Italiano"
+      },
+      {
+        "sysLangue": "ru",
+        "showLangue": "Русский язык"
+      },
+      {
+        "sysLangue": "es",
+        "showLangue": "Español"
+      },
+      {
+        "sysLangue": "po",
+        "showLangue": "Português"
+      },
+      {
+        "sysLangue": "vn",
+        "showLangue": "Tiếng Việt"
+      },
+      {
+        "sysLangue": "uk",
+        "showLangue": "Українська"
+      },
+      {
+        "sysLangue": "ar",
+        "showLangue": "عربي"
+      }
+     ]
+}

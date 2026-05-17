@@ -7,15 +7,26 @@ Terminal*_*/
 *.tmf
 *.zip
 
-# Binary dumps / backups
-*.bin
-backup_*
+# Binary dumps / backups — to'liq mtd backup git'ga emas (katta + sensitive)
+mtd_backup/
 *.bak
+backup_*
+*.orig
+
+# Boshqa NVR fayllari (vendor firmware, alohida)
+nvr.NBD-*.bin
+
+# Lekin firmware/ ichidagilar (modified mtd) GIT'GA QO'SHILADI
+!firmware/
+!firmware/**
 
 # Local secrets
 *.token
 *token*
 secrets.*
+
+# Claude
+.claude/
 
 # OS junk
 Thumbs.db
