@@ -1,0 +1,2 @@
+28cebfe9761f9ced4004f6300b445979 *mtd5_web_uz.bin
+80acfa527b240a15fa90f1d2aa531c4a *mtd6_custom_v4.bin

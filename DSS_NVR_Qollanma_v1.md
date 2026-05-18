@@ -23,11 +23,12 @@
 | 3. O'zbek tilga tarjima (1346 string) | ✅ | mtd5'da hardcoded |
 | 4. `language.json` (ja → uz) | ✅ | mtd5'da |
 | 5. `playMode.json` (EasyVideo → DirectMode) | ✅ | mtd5'da |
-| 6. Cloud DNS bloklash (43 domen → 0.0.0.0) | ✅ | mtd6 install.sh dan |
-| 7. Cloud IP route reject (34 ta IP) | ✅ | mtd6 install.sh dan |
+| 6. Cloud DNS bloklash (47 domen → 0.0.0.0) | ✅ | mtd6 install.sh dan |
+| 7. Cloud IP route reject (35 ta IP) | ✅ | mtd6 install.sh dan |
 | 8. `p2p_telnet.sh` backdoor neytrali | ✅ | mtd6 install.sh dan |
 | 9. /etc/hosts edvr-overwrite himoyasi | ✅ | mtd6 guard loop |
 | 10. **Factory reset chidamliligi** | ✅ | mtd5 + mtd6 RO squashfs |
+| 11. Firmware update endpoints bloklangan | ✅ | mtd6 v4 |
 
 ---
 
@@ -111,10 +112,15 @@ mtd8  0x4900000-0x8000000  55M  config   UBIFS — yagona writable (factory rese
 - `*.aftx.net` (3 ta: bjdev, hzdev, szdev)
 - `ewcloud.com`, `ai.com`
 
-**Vaqt server:**
-- `pool.ntp.org` (lokal NTP server tavsiya)
+**Firmware update endpointlar (mtd6 v4 da qo'shildi):**
+- `update.ods.org` + `ods.org` (DDNS provider, ServerName_05)
+- `www.zwcloud.wang` + `zwcloud.wang` root (ver10/XMLSchema)
+- IP: `139.9.6.140` (CloudUpgradeTest test serveri)
 
-**JAMI: 43 ta domen → 0.0.0.0, 34 ta IP → No route to host**
+**Vaqt server:**
+- `pool.ntp.org` + variantlar (lokal NTP server tavsiya)
+
+**JAMI: 47 ta domen → 0.0.0.0, 35 ta IP → No route to host**
 
 ### DSS backdoor
 
@@ -234,7 +240,9 @@ kernel (uImage from mtd3) + bootargs:
 
 **v2:** `/etc/hosts` symlink-ni tmpfs regular fayl ga aylantirish.
 
-**v3 (FINAL):** **edvr ishga tushgandan keyin** `/etc/hosts` ni qaytadan yozish + **60s guard loop** edvr qaytaroq yozishidan himoya.
+**v3:** **edvr ishga tushgandan keyin** `/etc/hosts` ni qaytadan yozish + **60s guard loop** edvr qaytaroq yozishidan himoya.
+
+**v4 (FINAL):** firmware update endpointlar qo'shildi — `139.9.6.140` IP, `update.ods.org`, `www.zwcloud.wang`. **Audit topilmalari** asosida (login.js + Edvr.cfg dan).
 
 ### Faza 8: Factory reset — yakuniy QA sinov
 - ✅ Til o'zbekcha (mtd5)
@@ -254,7 +262,7 @@ kernel (uImage from mtd3) + bootargs:
 2. mtd6 (RO)   — install.sh: cloud blok + telnet 2323 + p2p_telnet neytrali
 3. UBIFS (RW)  — endi BO'SH (factory reset bilan o'chiriladi, lekin kerakmas)
 4. Guard loop  — har 60s /etc/hosts ni qayta tekshiradi
-5. Route reject — kernel level IP bloklash (34 ta)
+5. Route reject — kernel level IP bloklash (35 ta)
 ```
 
 ---
@@ -274,7 +282,11 @@ kernel (uImage from mtd3) + bootargs:
 | `language.json` | Repo + mtd5 ichida | Til selektor JSON (ja → uz) |
 | `firmware/install_addon_v1.sh` | Repo | mtd6 v1 install.sh qo'shimchasi |
 | `firmware/install_addon_v2.sh` | Repo | mtd6 v2 — /etc/hosts symlink fix |
-| `firmware/install_addon_v3.sh` | Repo | **mtd6 v3 — FINAL versiya** |
+| `firmware/mtd5_web_uz.bin` | Repo | **mtd5 — O'zbek til (FINAL)** |
+| `firmware/mtd6_custom_v4.bin` | Repo | **mtd6 — cloud blok v4 (FINAL)** |
+| `firmware/build_scripts/install_addon_v1-v4.sh` | Repo | install.sh ga qo'shimcha (versiyalar tarixi) |
+| `firmware/README.md` | Repo | Firmware deploy ko'rsatma |
+| `firmware/MD5SUMS.txt` | Repo | Hash tasdiqlash |
 
 ### PC va helper
 | Fayl | Joy | Maqsad |
@@ -478,7 +490,7 @@ curl http://192.168.1.111/custom/language.json
 | **MD5crypt parol almashtirish** (mtd4) | Yuqori | O'rta — rootfs reflash |
 | **WebPlayer (WASM) sozlash** (video oqimi uchun) | Yuqori | Past |
 | **Lokal NTP server** (pool.ntp.org o'rniga) | Past | Past — hosts qator qo'shish |
-| **Local OSD (HDMI ekran)** tarjima | **Juda yuqori** | O'rta — `iDVR_9000.rc` 1.8MB binary |
+| **Local OSD (HDMI ekran)** Uzbek tarjima | **Juda yuqori** (2-3 oy) | O'rta — `iDVR_9000.rc` 1.8MB binary, **HECS-1 vendor encoding** (GBK emas), `.cs` schema fayli, custom rcc kerak. NVR allaqachon English+Russian ni qo'llab-quvvatlaydi (MenuLanguage tanlash orqali) |
 
 ---
 
@@ -500,7 +512,7 @@ curl http://192.168.1.111/custom/language.json
 14. **mtd5 reflash (til doimiy)**
 15. Factory reset bilan til sinovi
 16. Cloud bloklash UBIFS overlay (DNS + route + did.ini)
-17. **mtd6 reflash v3 (cloud blok doimiy, edvr-override himoyasi)**
+17. **mtd6 reflash v4 (cloud blok doimiy, firmware update endpoints ham)**
 18. **Factory reset bilan to'liq sinov — ✅ HAMMA TEST OK**
 
 ---
